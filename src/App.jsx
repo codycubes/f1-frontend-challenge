@@ -7,10 +7,10 @@ export default function App() {
   const [currentInstructionIndex, setCurrentInstructionIndex] = useState(0);
 
   const instructions = [
-    "Instruction 1: Go through all the world champions races before the timer turns red to earn extra points.",
-    "Instruction 2: Every world champion explored gives you 20 points",
-    "Instruction 3: If you finish while the timer is green, you get 20 points, if it is yellow, 10 points, red is 5 points .",
-    "Click the first World Champion to start. Goodluck!"
+    "Instruction 1: Go Through All The World Champions Races Before The timer Turns Red To Earn Extra Points.",
+    "Instruction 2: Every World Champion Explored Gives You 20 Points",
+    "Instruction 3: If You Finish While The Timer Is Green, You Get 20 Points, If It Is Yellow, 10 points, Red is 5 Points.",
+    "Click On The First World Champion To Start. Goodluck!"
   ];
 
   const handleNextInstruction = () => {

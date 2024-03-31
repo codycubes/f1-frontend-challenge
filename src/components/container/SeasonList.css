@@ -1,41 +1,40 @@
-/*SeasonList..css*/
-
 .Menu {
-    position: sticky;
-    top: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #ff0000; /* Assuming brand-red-200 corresponds to #EF4444 */
-    padding: 0.75rem 1.5rem; /* Corresponds to px-6 py-3 */
-    z-index: 100;
-  }
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ff0000;
+  padding: 0.75rem 1.5rem;
+  z-index: 100;
+}
 
+.game-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 40px;
+}
 
-  .game-info {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 40px;
-  }
+.champion-header {
+  border-bottom: 1px solid #dee2e6;
+  margin-bottom: 30px;
+}
 
-  .champion-header {
-    border-bottom: 1px solid #dee2e6;
-    margin-bottom: 30px;
-  }
+h2 {
+  font-size: 26px;
+}
 
-  h2 {
-    font-size: 26px;
-  }
+/* Conditional styles for timer */
+.time span {
+  color: #00FF00; /* default green */
+}
 
-  
-  @media (min-width: 768px) {
-    .sticky-header {
-      height: 100vh; /* Corresponds to md:h-screen */
-      width: 4rem; /* Corresponds to md:w-16 */
-      flex-direction: column; /* Corresponds to md:flex-col */
-      padding: 1.5rem 0.75rem; /* Corresponds to md:px-3 md:py-6 */
-    }
-  }
-  
+.time span[style*='color:#FFFF00'] {
+  color: #FFFF00; /* yellow */
+}
+
+.time span[style*='color:#FF0000'] {
+  color: #FF0000; /* red */
+}

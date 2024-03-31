@@ -9,26 +9,23 @@ export const SeasonList = () => {
   const [seasonRaces, setSeasonRaces] = useState([]);
   const [selectedSeason, setSelectedSeason] = useState('');
   const [selectedSeasonChampionId, setSelectedSeasonChampionId] = useState('');
-  const [exploredSeasons, setExploredSeasons] = useState(1); // New state to track explored seasons
-  const [totalSeasons, setTotalSeasons] = useState(0); // New state to track total seasons
+  const [exploredSeasons, setExploredSeasons] = useState(1);
+  const [totalSeasons, setTotalSeasons] = useState(0);
   const [progress, setProgress] = useState(0);
   const [points, setPoints] = useState(0);
   const [timerStarted, setTimerStarted] = useState(false);
   const [startTime, setStartTime] = useState(0);
   const [endTime, setEndTime] = useState(0);
-  const [elapsedTime, setElapsedTime] = useState(0);
-
 
   useEffect(() => {
     let intervalId;
     if (timerStarted) {
       intervalId = setInterval(() => {
-        setElapsedTime((Date.now() - startTime) / 1000);
+        setEndTime(Date.now()); // Update endTime to current time
       }, 1000);
     }
-    return () => clearInterval(intervalId); // Cleanup interval
-  }, [timerStarted, startTime]);
-
+    return () => clearInterval(intervalId);
+  }, [timerStarted]);
 
   const startTimer = () => {
     if (!timerStarted) {
@@ -38,14 +35,24 @@ export const SeasonList = () => {
   };
 
   const formatTime = () => {
-    const elapsedTime = ((endTime || Date.now()) - startTime) / 1000; // Calculate elapsed time in seconds
+    const elapsedTime = ((endTime || Date.now()) - startTime) / 1000;
     const minutes = Math.floor(elapsedTime / 60);
     const seconds = Math.floor(elapsedTime % 60);
-    return `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-  };
+
+    let timerColor = '#00FF00'; // default green
+    if (elapsedTime >= 120) {
+      timerColor = '#FF0000'; // red
+    } else if (elapsedTime >= 90) {
+      timerColor = '#FFFF00'; // yellow
+    }
   
 
-
+    return (
+      <span style={{ color: timerColor }}>
+        {`${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`}
+      </span>
+    );
+  };
 
   useEffect(() => {
     getDriverStandingsForAssignment().then(
@@ -53,7 +60,7 @@ export const SeasonList = () => {
         if (res.data) {
           const standingsLists = res.data.MRData.StandingsTable.StandingsLists;
           setSeasons(standingsLists);
-          setTotalSeasons(standingsLists.length); // Update total seasons count
+          setTotalSeasons(standingsLists.length);
         }
       },
       (err) => {
@@ -67,18 +74,15 @@ export const SeasonList = () => {
     setProgress(newProgress);
 
     if (newProgress === 100) {
-      setEndTime(Date.now()); // Set end time when all seasons are explored
-      const elapsedTime = (endTime - startTime) / 1000; // Calculate elapsed time in seconds
-      if (elapsedTime < 45) {
-        setPoints(points + 30); // Add 30 points if explored under 45 seconds
-      } else if (elapsedTime < 60) {
-        setPoints(points + 20); // Add 20 points if explored under 1 minute
+      const elapsedTime = ((endTime || Date.now()) - startTime) / 1000; // Calculate elapsed time here
+      if (elapsedTime < 60) {
+        setPoints(points + 30);
       } else if (elapsedTime < 90) {
-        setPoints(points + 5); // Add 5 points if explored under 1 minute and 30 seconds
+        setPoints(points + 20);
+      } else if (elapsedTime < 120) {
+        setPoints(points + 5);
       }
-      // setShowCongratulations(true);
     }
-
   };
 
   const seasonClicked = (season, championId) => {
@@ -89,8 +93,8 @@ export const SeasonList = () => {
           setSeasonRaces(res.data.MRData.RaceTable.Races);
           setSelectedSeason(season);
           setSelectedSeasonChampionId(championId);
-          setExploredSeasons(exploredSeasons + 1); // Update explored seasons count
-          updateProgress(); // Update progress after setting state
+          setExploredSeasons(exploredSeasons + 1);
+          updateProgress();
           setPoints(points + 20);
         }
       },
@@ -113,39 +117,37 @@ export const SeasonList = () => {
 
   return (
     <>
-
-    <aside className='Menu'>
-      <h1>1</h1>
-      <h1>2</h1>
-     
-
-    </aside>
+      <aside className='Menu'>
+        <h1>1</h1>
+        <h1>2</h1>
+      </aside>
 
       <aside className='sidebar'>
         <h1 className='champion-header'>F1 World Champions</h1>
- 
         {seasons.length > 0 ? seasonsList : 'Loading'}
       </aside>
 
       <main className='main-content'>
-
         {seasonRaces.length > 0 && (
-        <> 
-        <div className='game-info'>
-          <h2 className='points'>Points: {points}  </h2>
-          {timerStarted && (
-          <h2 className='time'>Time: {formatTime(elapsedTime)}</h2> )}
-           <progress className="progress-bar" value={progress} max="100"></progress>
-        </div>
+          <>
+            <div className='game-info'>
+              <h2 className='points'>Points: {points} XP</h2>
+              {timerStarted && (
+                <h2 className='time'>Time: {formatTime()}</h2>
+              )}
+              <progress className="progress-bar" value={progress} max="100"></progress>
+            </div>
         
-          <SeasonReport
-            championId={selectedSeasonChampionId}
-            races={seasonRaces}
-            season={selectedSeason}
-          />
+            <SeasonReport
+              championId={selectedSeasonChampionId}
+              races={seasonRaces}
+              season={selectedSeason}
+            />
           </>
         )}
       </main>
     </>
   );
 };
+
+// export default SeasonList;
