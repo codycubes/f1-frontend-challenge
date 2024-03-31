@@ -1,0 +1,47 @@
+.season-report {
+  width: 100%;
+  margin: 0px ;
+  padding: 40px;
+}
+
+.season-header {
+  text-align: right;
+  align-items: right;
+  justify-content: right;
+}
+
+.list-header {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  /* flex-wrap: wrap; */
+  padding: 10px;
+
+
+  /* display: flex;
+  flex-wrap: wrap; */
+  background-color: transparent;
+  border-bottom: 1px solid #dee2e6; /* Example border color */
+  /* padding: 8px; */
+  color: white;
+}
+
+.list-header-item {
+
+  display: flex;
+  font-weight: bold;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  padding: 8px;
+}
+
+.race-list-item {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 2px solid #dee2e6; /* Example border color */
+  /* padding: 8px; */
+  margin-bottom: 20px;
+}

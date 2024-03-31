@@ -1,0 +1,41 @@
+/*SeasonList..css*/
+
+.Menu {
+    position: sticky;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ff0000; /* Assuming brand-red-200 corresponds to #EF4444 */
+    padding: 0.75rem 1.5rem; /* Corresponds to px-6 py-3 */
+    z-index: 100;
+  }
+
+
+  .game-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 40px;
+  }
+
+  .champion-header {
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 30px;
+  }
+
+  h2 {
+    font-size: 26px;
+  }
+
+  
+  @media (min-width: 768px) {
+    .sticky-header {
+      height: 100vh; /* Corresponds to md:h-screen */
+      width: 4rem; /* Corresponds to md:w-16 */
+      flex-direction: column; /* Corresponds to md:flex-col */
+      padding: 1.5rem 0.75rem; /* Corresponds to md:px-3 md:py-6 */
+    }
+  }
+  
