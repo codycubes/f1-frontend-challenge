@@ -1,14 +1,8 @@
 import axios from 'axios';
 
 import { START_YEAR, FINISH_YEAR, BEGINNING_YEAR, API_BASE_URL } from './../config';
-/**
- * Function
- * @name getDriverStandingsForAllRacesInPeriod
- * @param  startYear 
- * @param  endYear 
- * @description The function is used to fetch the seasons list from API. 
- * Using a mathematical approach for offset and limit and API doc, this seems the best way
- */
+
+
 function getDriverStandingsForAllRacesInPeriod(startYear, endYear) {
 	const offset = startYear - BEGINNING_YEAR;
 	const limit = (endYear - startYear) + 1;
