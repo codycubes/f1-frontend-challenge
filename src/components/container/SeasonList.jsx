@@ -135,8 +135,8 @@ export const SeasonList = () => {
   return (
     <>
       <aside className='Menu'>
-        {/* <h1>1</h1>
-        <h1>2</h1> */}
+    <img className='races' src='./flag.png' />
+    <img className='Leaderboard' src='./Trophy.png' />
       </aside>
 
       <aside className='sidebar'>

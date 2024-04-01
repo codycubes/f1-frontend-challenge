@@ -21,6 +21,14 @@
   z-index: 100;
 }
 
+img {
+  width: 40px;
+  height: 40px;
+}
+img:hover {
+  cursor: pointer;
+}
+
 
 .game-info {
   display: -webkit-box;
