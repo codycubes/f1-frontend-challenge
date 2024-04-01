@@ -5,6 +5,9 @@ import { getDriverStandingsForAssignment, getAllRacesForYear } from '../../servi
 import './SeasonList.css';
 
 export const SeasonList = () => {
+
+
+    // State variables using useState hook
   const [seasons, setSeasons] = useState([]);
   const [seasonRaces, setSeasonRaces] = useState([]);
   const [selectedSeason, setSelectedSeason] = useState('');
@@ -17,6 +20,8 @@ export const SeasonList = () => {
   const [startTime, setStartTime] = useState(0);
   const [endTime, setEndTime] = useState(0);
 
+
+    // useEffect to handle timer logic
   useEffect(() => {
     let intervalId;
     if (timerStarted) {
@@ -27,6 +32,8 @@ export const SeasonList = () => {
     return () => clearInterval(intervalId);
   }, [timerStarted]);
 
+
+    // Function to start the timer
   const startTimer = () => {
     if (!timerStarted) {
       setTimerStarted(true);
@@ -34,15 +41,17 @@ export const SeasonList = () => {
     }
   };
 
+
+    // Function to format time for display
   const formatTime = () => {
     const elapsedTime = ((endTime || Date.now()) - startTime) / 1000;
     const minutes = Math.floor(elapsedTime / 60);
     const seconds = Math.floor(elapsedTime % 60);
 
     let timerColor = '#00FF00'; // default green
-    if (elapsedTime >= 120) {
+    if (elapsedTime >= 90) {
       timerColor = '#FF0000'; // red
-    } else if (elapsedTime >= 90) {
+    } else if (elapsedTime >= 60) {
       timerColor = '#FFFF00'; // yellow
     }
   
@@ -54,6 +63,8 @@ export const SeasonList = () => {
     );
   };
 
+
+    // useEffect to fetch driver standings for assignment
   useEffect(() => {
     getDriverStandingsForAssignment().then(
       (res) => {
@@ -69,6 +80,7 @@ export const SeasonList = () => {
     );
   }, []);
 
+ // Function to update progress based on explored seasons
   const updateProgress = () => {
     const newProgress = (exploredSeasons / totalSeasons) * 100;
     setProgress(newProgress);
@@ -85,6 +97,9 @@ export const SeasonList = () => {
     }
   };
 
+
+
+   // Function to handle season selection
   const seasonClicked = (season, championId) => {
     startTimer();
     getAllRacesForYear(season).then(
@@ -104,6 +119,8 @@ export const SeasonList = () => {
     );
   };
 
+
+    // Generate list of seasons
   const seasonsList = seasons.map((seasonData) => (
     <SeasonListItem
       key={seasonData.season}
@@ -118,26 +135,28 @@ export const SeasonList = () => {
   return (
     <>
       <aside className='Menu'>
-        <h1>1</h1>
-        <h1>2</h1>
+        {/* <h1>1</h1>
+        <h1>2</h1> */}
       </aside>
 
       <aside className='sidebar'>
         <h1 className='champion-header'>F1 World Champions</h1>
-        {seasons.length > 0 ? seasonsList : 'Loading'}
+        {seasons.length > 0 ? seasonsList : 'Loading'}            {/* Display seasons list or 'Loading' message */}
       </aside>
 
-      <main className='main-content'>
-        {seasonRaces.length > 0 && (
+      <main className='main-content'> {/* Display race info if available */}
+        {seasonRaces.length > 0 && (                             
           <>
             <div className='game-info'>
-              <h2 className='points'>Points: {points} XP</h2>
+              <h2 className='points'>Points: {points} XP</h2> {/* Display points earned */}
               {timerStarted && (
-                <h2 className='time'>Time: {formatTime()}</h2>
-              )}
-              <progress className="progress-bar" value={progress} max="100"></progress>
+                <h2 className='time'>Time: {formatTime()}</h2>  
+              )}                                              {/* Format and display timer */}
+
+              <progress className="progress-bar" value={progress} max="100"></progress>     {/* Display progress bar */}
             </div>
         
+                {/*Displays the world champions*/}
             <SeasonReport
               championId={selectedSeasonChampionId}
               races={seasonRaces}
@@ -150,4 +169,4 @@ export const SeasonList = () => {
   );
 };
 
-// export default SeasonList;
+

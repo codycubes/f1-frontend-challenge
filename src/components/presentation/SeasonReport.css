@@ -1,3 +1,5 @@
+
+
 .season-report {
   width: 100%;
   margin: 0px ;
@@ -6,42 +8,47 @@
 
 .season-header {
   text-align: right;
-  align-items: right;
-  justify-content: right;
+  -webkit-box-align: right;
+      -ms-flex-align: right;
+          align-items: right;
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
 }
 
 .list-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  align-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   text-align: center;
-  justify-content: space-between;
-  /* flex-wrap: wrap; */
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   padding: 10px;
-
-
-  /* display: flex;
-  flex-wrap: wrap; */
   background-color: transparent;
-  border-bottom: 1px solid #dee2e6; /* Example border color */
-  /* padding: 8px; */
+  border-bottom: 1px solid #dee2e6; 
   color: white;
 }
 
 .list-header-item {
 
+  display: -webkit-box;
+
+  display: -ms-flexbox;
+
   display: flex;
   font-weight: bold;
-  align-items: center;
-  justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   align-items: center;
   text-align: center;
   padding: 8px;
 }
 
-.race-list-item {
-  display: flex;
-  flex-wrap: wrap;
-  border-bottom: 2px solid #dee2e6; /* Example border color */
-  /* padding: 8px; */
-  margin-bottom: 20px;
-}

@@ -11,14 +11,11 @@ function getDriverStandingsForAllRacesInPeriod(startYear, endYear) {
 }
 
 // here we call the api fetch for start year to end year
-// No tomorrow id someone wants to change the to and from years, 
-// JUST go to config and change the constants.
 export function getDriverStandingsForAssignment() {
 	return getDriverStandingsForAllRacesInPeriod(START_YEAR, FINISH_YEAR);
 }
 
 // This function gets the races of a season
-//	We can also use the limit and offset here for paginating results if needed
 export function getAllRacesForYear(season) {
 	return axios.get(`${API_BASE_URL}/${season}/results/1.json`);
 }
